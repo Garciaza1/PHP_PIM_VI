@@ -1,0 +1,15 @@
+{
+    "name": "pichau/php_pim_vi",
+    "autoload": {
+        "psr-4": {
+            "Pichau\\PhpPimVi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gustavo Ribeiro Garcia",
+            "email": "102680004+Garciaza1@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
