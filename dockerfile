@@ -23,7 +23,8 @@ EXPOSE 80
 # precisa colocar nesta imagem o mysql ou phpmyadmin
 
 # "composer install" sempre que alterar o composer.json 
-# docker-compose up --build ou dar run na imagem ja criada do pim_VI com um nome e postas
+# docker-compose up -d --build ou dar run na imagem ja criada do pim_VI com um nome e postas
+# docker exec -it <nome-do-container> mysql -u root -p
 
 # PS C:\Users\Pichau> docker ps
 # CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                  NAMES

@@ -2,8 +2,14 @@
     "name": "pichau/php_pim_vi",
     "autoload": {
         "psr-4": {
-            "Pichau\\PhpPimVi\\": "src/"
-        }
+            "PIM_VI\\Controllers\\": ["src/Controller"],
+            "PIM_VI\\Models\\": ["src/Model"],
+            "PIM_VI\\System\\":["src/system"]
+        },
+        "files": [
+            "src/config.php",
+            "src/helpers/functions.php"
+        ]
     },
     "authors": [
         {

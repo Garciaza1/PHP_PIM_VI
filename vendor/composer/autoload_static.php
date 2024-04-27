@@ -6,17 +6,32 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit10ccf07544687ddb0768b0259a530b2e
 {
+    public static $files = array (
+        '7703e440c95faf96e1ecac0e44c6c82d' => __DIR__ . '/../..' . '/src/config.php',
+        '22a7ccb4603dc7cb1418a2285e913d40' => __DIR__ . '/../..' . '/src/helpers/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'Pichau\\PhpPimVi\\' => 16,
+            'PIM_VI\\System\\' => 14,
+            'PIM_VI\\Models\\' => 14,
+            'PIM_VI\\Controllers\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Pichau\\PhpPimVi\\' => 
+        'PIM_VI\\System\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/src/system',
+        ),
+        'PIM_VI\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Model',
+        ),
+        'PIM_VI\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Controller',
         ),
     );
 

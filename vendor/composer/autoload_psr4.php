@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Pichau\\PhpPimVi\\' => array($baseDir . '/src'),
+    'PIM_VI\\System\\' => array($baseDir . '/src/system'),
+    'PIM_VI\\Models\\' => array($baseDir . '/src/Model'),
+    'PIM_VI\\Controllers\\' => array($baseDir . '/src/Controller'),
 );

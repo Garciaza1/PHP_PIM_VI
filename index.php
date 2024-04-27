@@ -1,12 +1,9 @@
 <?php
-echo "<h1>VAI DURMI GATINHAAAAAAAAAAA</h1>";
 
-// <?php
+require_once("vendor/autoload.php");
 
-// require_once("vendor/autoload.php");
+use PIM_VI\System\Router;
 
-// use GymSolution\System\Router;
+session_start();
 
-// session_start();
-
-// Router::dispatch();
+Router::dispatch();
