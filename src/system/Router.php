@@ -45,7 +45,11 @@ class Router
         
             // Verifica se 'id' está presente nos parâmetros
             if (isset($parameters['id'])) {
+<<<<<<< HEAD
                 $controllerInstance->$method(...array_values($parameters));
+=======
+                $controllerInstance->$method($parameters['id']);
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
             } else {
                 $controllerInstance->$method(...$parameters);
             }

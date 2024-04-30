@@ -4,7 +4,11 @@
             <div class="card p-4">
 
                 <div class="d-flex align-items-center justify-content-center my-4">
+<<<<<<< HEAD
                     <img src="<?= IMAGE_PATH . 'logo-gira.gif'?>" class="img-fluid me-3 rounded-5" style="height: 46px;">
+=======
+                    <img src="<?= IMAGE_PATH . 'KEVIN-1_vetor2.png'?>" class="img-fluid me-3" style="height: 46px;">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                     <h2><strong><?= APP_NAME ?></strong></h2>
                 </div>
 

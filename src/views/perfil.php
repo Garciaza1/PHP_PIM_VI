@@ -5,37 +5,73 @@
 
 
 $nome = $data['user']['nome'];
+<<<<<<< HEAD
 $email = $data['user']['email'];
 $tipo = $data['user']['tipo'];
 
 
+=======
+$sexo = $data['user']['sexo'];
+$idade = $data['user']['idade'];
+$email = $data['user']['email'];
+$telefone = $data['user']['telefone'];
+$nascimento = $data['user']['nascimento'];
+
+if ($sexo == 'm') {
+    $sexoCompleto = "Masculino";
+} elseif ($sexo == 'f') {
+    $sexoCompleto = "Feminino";
+}
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
 
 
 ?>
 
 
+<<<<<<< HEAD
 <div class="container-fluid p-5 ">
     <h1 class="ps-4 pb-4">Seu Perfil</h1>
     <div class="row m-3">
         <nav class="col-3 border rounded-2 border-dark border-4 d-flex justify-content-center">
             <div class="menu-header justfy-content-between text-center mb-2">
+=======
+<div class="container-fluid p-5 text-dark">
+    <h1 class="ps-4 pb-4">Seu Perfil</h1>
+    <div class="row m-3">
+        <nav class="col-3 border rounded-2 border-dark border-4 d-flex justify-content-center">
+            <div class="menu-header justfy-content-between text-center">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                 <div>
                     <p class="p-1">
                     <h4>Dados atuais do cliente:</h4>
 
                     <br>Nome:<strong><?= ' ' .  $nome ?></strong><br>
                     <br>Email:<strong><?= ' ' .  $email ?></strong><br>
+<<<<<<< HEAD
                     <br>Tipo:<strong><?= ' ' . $tipo ?></strong><br>
                     <hr>
                     <a class="btn border border-2 mt-2" href="#"><i data-fa-symbol="delete" class="fa-solid fa-trash fa-fw me-2"></i>DELETAR PERFIL</a>
                     <br>
                     <br>Depois de apertar não tem volta!
+=======
+                    <br>Data De Nascimento:<strong><?= ' ' . $nascimento ?></strong><br>
+                    <br>Telefone:<strong><?= ' ' .  $telefone ?></strong><br>
+                    <br>Sexo:<strong><?= ' ' .  $sexoCompleto ?></strong>
+                    <br>
+                    <hr>
+                    <a class="btn border border-2 mt-5" href="#"><i data-fa-symbol="delete" class="fa-solid fa-trash fa-fw me-2"></i>DELETAR PERFIL</a>
+                    <br>depois de apertar não tem volta!
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                 </div>
             </div>
         </nav>
 
+<<<<<<< HEAD
         <main class="col-8 ms-4 align-items-center border rounded-5 border-dark border-4 p-4 d-grid justify-content-center">
+=======
+        <main class="col-8 ms-4 align-items-center border-start border-end border-top rounded-5 border-dark border-4 p-4 d-grid justify-content-center">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
             <div class="container text-center pe-5 me-5">
 
@@ -104,6 +140,90 @@ $tipo = $data['user']['tipo'];
                         <button type="" name="update_senha" class="mudar_senha btn btn-primary mt-2"><a class="text-white" href="?ct=reset&mt=pass_recover_form">Mudar senha</a></button>
                 
                 </section>
+<<<<<<< HEAD
+=======
+
+                <!-- alterar aniversario -->
+                <section class="border border-secundary-subtle rounded-3 p-3 my-2 col-12">
+
+                    <h5 class="card-title pb-1">Alterar data do aniversario:
+                        <button class="btn btn-outline-secondary btn-sm ms-2 border-0 border-bottom" style="width: 8%" id="abreData">
+                            ↧
+                        </button>
+                    </h5>
+
+                    <form method="post" action="" class="form d-block d-none">
+                        <div class="form-group">
+                            <?php
+                                $csrf_token = bin2hex(random_bytes(32));
+                                $_SESSION['csrf_token'] = $csrf_token;
+                            ?>
+                            <input hidden name="csrf_token" value="<?= $csrf_token ?>"><!-- token -->
+                            <input type="date" class="form-control" name="mudar_data" id="mudar_data" placeholder="escolha uma data"></input>
+                        </div>
+
+                        <button type="submit" name="update_data" class="mudar_aniversario btn btn-primary mt-2">Mudar aniversario</button>
+                    </form>
+
+                </section>
+
+                <!-- alterar telefone -->
+                <section class="border border-secundary-subtle rounded-3 p-3 my-2 col-12">
+                    <h5 class="card-title pb-1">Alterar telefone:
+                        <button class="btn btn-outline-secondary btn-sm ms-2 border-0 border-bottom" style="width: 8%;" id="abreTel">
+                            ↧
+                        </button>
+                    </h5>
+
+                    <form method="post" action="" class="form d-block d-none">
+
+                        <div class="form-group">
+                            <?php
+                                $csrf_token = bin2hex(random_bytes(32));
+                                $_SESSION['csrf_token'] = $csrf_token;
+                            ?>
+                            <input hidden name="csrf_token" value="<?= $csrf_token ?>"><!-- token -->
+                            <input type="tel" class="form-control" name="text_mudar_telefone" id="mudar_tel"></input>
+                        </div>
+
+                        <button type="submit" name="update_telefone" class="mudar_tel btn btn-primary mt-2">Mudar telefone</button>
+
+                    </form>
+
+                </section>
+
+                <!-- alterar genero  trocar pra radious copiar a formatação do cadastro -->
+                <section class="border border-secundary-subtle rounded-3 p-3 my-2 col-12">
+                    <h5 class="card-title pb-1">Alterar genero
+                        <button class="btn btn-outline-secondary btn-sm ms-2 border-0 border-bottom" style="width: 8%" id="abreGenero">
+                            ↧
+                        </button>
+                    </h5>
+
+                    <form method="post" action="" class="form d-flex d-none">
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radio_gender" id="radio_m" value="m" checked>
+                                <label class="form-check-label" for="radio_m">Masculino</label>
+                            </div>
+                            <?php
+                                $csrf_token = bin2hex(random_bytes(32));
+                                $_SESSION['csrf_token'] = $csrf_token;
+                            ?>
+                            <input hidden name="csrf_token" value="<?= $csrf_token ?>"><!-- token -->
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="radio_gender" id="radio_f" value="f">
+                                <label class="form-check-label" for="radio_f">Feminino</label>
+                            </div>
+                            <div class="form-group mt-1 text-center">
+                                <button type="submit" name="update_genero" class="mudar_genero btn btn-primary mt-2">Mudar
+                                    genero</button>
+                            </div>
+                    </form>
+
+                </section>
+
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
             </div>
         </main>
     </div>

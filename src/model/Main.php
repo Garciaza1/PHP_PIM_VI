@@ -28,12 +28,20 @@ class Main extends Database
         
 
         
+<<<<<<< HEAD
         $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, senha, tipo, created_at) VALUES (:nome, :email, :senha, :tipo, NOW())");
+=======
+        $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (:nome, :email, aes_encrypt(:senha, :aes_cript), :tipo)");
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
         $stmt->bindParam(':tipo', $tipo);
+<<<<<<< HEAD
         // $stmt->bindParam(':aes_cript', aes_cript);
+=======
+        $stmt->bindParam(':aes_cript', aes_cript);
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         
         try{
             $stmt->execute();
@@ -62,8 +70,13 @@ class Main extends Database
     
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     
+<<<<<<< HEAD
         // if ($usuario && password_verify($senha, $usuario['senha'])) {
         if ($senha == $usuario['senha']) {
+=======
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
+        // if ($senha == $usuario['senha']) {
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
             //se stiver mais de zero rows ele da status true
             return [
                 'status' => true
@@ -177,4 +190,67 @@ class Main extends Database
     }
     
 
+<<<<<<< HEAD
+=======
+    public function change_data($post_data) {
+        
+        $nascimento = $post_data['mudar_data'];
+        $id = $_SESSION['user']['id'];
+        
+        $stmt = $this->conn->prepare("UPDATE usuarios SET  nascimento = :nascimento UpdatedAt = NOW() WHERE id = :id");
+        $stmt->bindParam(':nascimento', $nascimento);
+        $stmt->bindParam(':id', $id);
+        ;
+
+        try{
+            $stmt->execute();
+        }catch(Throwable $e){
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+    }
+
+
+    public function change_tel($post_data) {
+        $telefone = $post_data['text_mudar_telefone'];
+        $id = $_SESSION['user']['id'];
+        
+        $stmt = $this->conn->prepare("UPDATE usuarios SET  telefone = :telefone UpdatedAt = NOW() WHERE id = :id");
+        $stmt->bindParam(':telefone', $telefone);
+        $stmt->bindParam(':id', $id);
+        ;
+
+        try{
+            $stmt->execute();
+        }catch(Throwable $e){
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+    }
+    
+
+    public function change_sex($post_data) {
+        $sexo = $post_data['update_genero'];
+        $id = $_SESSION['user']['id'];
+        
+        $stmt = $this->conn->prepare("UPDATE usuarios SET  sexo = :sexo UpdatedAt = NOW() WHERE id = :id");
+        $stmt->bindParam(':sexo', $sexo);
+        $stmt->bindParam(':id', $id);
+        ;
+
+        try{
+            $stmt->execute();
+        }catch(Throwable $e){
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+    }
+
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 }

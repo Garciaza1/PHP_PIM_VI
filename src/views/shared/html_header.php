@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link rel="shortcut icon" href="<?= IMAGE_PATH . "logo-1"?>" type="image/png">
+=======
+    <link rel="shortcut icon" href="<?= IMAGE_PATH . "KEVIN-1_vetor2"?>" type="image/png">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     <!-- trocar as imagens criar logo simples -->
     <title><?= APP_NAME ?></title>
 
@@ -43,7 +47,11 @@
     <script defer src="<?= JS_PATH ?>"></script>
     <!-- CONT IMAGE_PATH . " NOME DA IMAGEM " -->
 
+<<<<<<< HEAD
     <link rel="icon" href="<?= IMAGE_PATH . 'logo-1.png' ?>" type="image/x-icon">
+=======
+    <link rel="icon" href="<?= IMAGE_PATH . 'KEVIN-1_vetor2.png' ?>" type="image/x-icon">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     <title>PIM_VI</title>
     <!--colocar icone no site-->
 

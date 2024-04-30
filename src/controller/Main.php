@@ -4,8 +4,12 @@ namespace PIM_VI\Controllers;
 
 use PIM_VI\Controllers\BaseController;
 use PIM_VI\Models\Main as ModelsMain;
+<<<<<<< HEAD
 use PIM_VI\Models\ProductModel;
 use PIM_VI\Models\ClientModel;
+=======
+// use PIM_VI\Models\UserModel;
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
 class Main extends BaseController
 {
@@ -315,7 +319,11 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
+<<<<<<< HEAD
         // $id = $_SESSION['user']['id'];
+=======
+        $id = $_SESSION['user']['id'];
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // $model = new UserModel();
         // $data['user_data'] = $model->get_last_user_data($id);
@@ -392,6 +400,10 @@ class Main extends BaseController
                 $this->perfil();
                 return;
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         }
 
         // VALIDAÇÃO DO EMAIL =========
@@ -425,13 +437,105 @@ class Main extends BaseController
                 $this->perfil();
                 return;
             } else {
+<<<<<<< HEAD
 
+=======
+                
+                $_SESSION['server_error'] = "O token não foi validado prencha novamente";
+                $this->perfil();
+                return;
+            }
+        }
+
+        //UPDATE DO DATA =============
+        if (isset($_POST['update_data'])) {
+
+            if (empty($_POST['mudar_data'])) {
+                $_SESSION['validation_errors'] = "a data precisa ser preenchida";
+            }
+
+            // check if birthdate is valid and is older than today
+            $birthdate = \DateTime::createFromFormat('d-m-Y', $_POST['text_birthdate']);
+            if (!$birthdate) {
+                $validation_errors[] = "A data de nascimento não está no formato correto.";
+            } else {
+                $today = new \DateTime();
+                if ($birthdate >= $today) {
+                    $validation_errors[] = "A data de nascimento tem que ser anterior ao dia atual.";
+                }
+            }
+
+            $nascimento = $_POST['mudar_data'];
+
+            if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
+                $model = new ModelsMain();
+                $model->change_name($nascimento);
+
+                $this->perfil();
+                return;
+            } else {
+                
+                $_SESSION['server_error'] = "O token não foi validado prencha novamente";
+                $this->perfil();
+                return;
+            }
+        }
+
+        //UPDATE DO TELEFONE =============
+        if (isset($_POST['update_telefone'])) {
+
+            if (empty($_POST['text_mudar_telefone'])) {
+                $_SESSION['validation_errors'] = "o telefone precisa ser preenchido";
+            }
+            $telefone = $_POST['text_mudar_telefone'];
+
+            if (preg_match('/^(\d{2})(\d{5})(\d{4})$/', $telefone, $matches)) {
+                $telefone_formatado = "({$matches[1]}) {$matches[2]}-{$matches[3]}";
+                echo $telefone_formatado;
+            }
+
+            if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
+                $model = new ModelsMain();
+                $model->change_name($telefone_formatado);
+
+                $this->perfil();
+                return;
+            } else {
+                
+                $_SESSION['server_error'] = "O token não foi validado prencha novamente";
+                $this->perfil();
+                return;
+            }
+        }
+
+        //UPDATE DO SEXO =============
+        if (isset($_POST['update_genero'])) {
+
+            if (empty($_POST['radio_gender'])) {
+                $_SESSION['validation_errors'] = "o genero precisa ser preenchido";
+            }
+
+            $sexo = $_POST['radio_gender'];
+
+            if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
+                $model = new ModelsMain();
+                $model->change_name($sexo);
+
+                $this->perfil();
+                return;
+            } else {
+                
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                 $_SESSION['server_error'] = "O token não foi validado prencha novamente";
                 $this->perfil();
                 return;
             }
         }
     }
+<<<<<<< HEAD
     
     // =============== PRODUTOS CONTROLLERS ==============================
 
@@ -479,6 +583,75 @@ class Main extends BaseController
 
 
     public function novo_produto() //aponta para o calculo_submit
+=======
+
+
+    public function user_profile()
+    {
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $this->login();
+            return;
+        }
+
+        $data['user'] = $_SESSION['user'];
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_last_user_data($id);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('user_profile', $data);
+        $this->view('shared/html_footer');
+    }
+
+    // =============== CALCULOS CONTROLLER ===========================
+
+    public function calculos() //pagina sobre a saúde e metabolismo PUBLICO
+    {
+
+        if ($_SESSION['user']) {
+            $data['user'] = $_SESSION['user'];
+        } else {
+            $data = [];
+        }
+
+        if (!empty($_SESSION['validation_errors'])) {
+            $data['validation_errors'] = $_SESSION['validation_errors'];
+            unset($_SESSION['validation_errors']);
+        }
+
+        // check if there was an invalid login
+        if (!empty($_SESSION['server_error'])) {
+            $data['server_error'] = $_SESSION['server_error'];
+            unset($_SESSION['server_error']);
+        }
+
+        $data['user'] = $_SESSION['user'];
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('calculos', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function calculos_forms() // identifica por sexo em js PUBLICO
+    {
+
+        if ($_SESSION['user']) {
+            $data['user'] = $_SESSION['user'];
+        } else {
+            $data = [];
+        }
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('calculos_forms', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function novas_medidas() //aponta para o calculo_submit
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -504,11 +677,11 @@ class Main extends BaseController
 
         $this->view('shared/html_header');
         $this->view('navbar', $data);
-        $this->view('novo_produto', $data);
+        $this->view('novas_medidas', $data);
         $this->view('shared/html_footer');
     }
-
-    public function produto_submit() //recebe de novas_medidas
+    
+    public function medidas_submit() //recebe de novas_medidas
     {
 
 
@@ -529,7 +702,7 @@ class Main extends BaseController
         $validation_errors = [];
 
         //valida todos os campos tendo que preenchelos.
-        $campos = ['nome', 'desc', 'fab', 'garant', 'valor', 'qntd', 'cod', 'plat'];
+        $campos = ['altura', 'peso', 'cintura', 'quadril', 'pescoco', 'braco', 'antebraco', 'panturrilha', 'perna', 'cinturaEscapular'];
         foreach ($campos as $campo) {
             // Verifica se o campo está vazio
             if (empty($_POST['text_' . $campo])) {
@@ -538,14 +711,169 @@ class Main extends BaseController
         }
 
         // Validação do campo de meta
-        if (empty($_POST['text_categoria'])) {
-            $validation_errors[] = 'A categoria é obrigatória.';
+        if (empty($_POST['text_meta'])) {
+            $validation_errors[] = 'A meta é obrigatória.';
         }
 
 
         // Se houver erros de validação, redireciona de volta ao formulário com os erros
         if (!empty($validation_errors)) {
             $_SESSION['validation_errors'] = $validation_errors;
+            $this->novas_medidas(); // ou o nome da função que exibe o formulário
+            return;
+        }
+
+        // reformatação dos campos....
+        $_POST['text_braco'];
+        $_POST['text_antebraco'];
+        $_POST['text_panturrilha'];
+        $_POST['text_perna'];
+        $_POST['text_cinturaEscapular'];
+        $_POST['text_meta'];
+
+        $sexo = $_SESSION['user']['sexo'];
+        $idade = $_SESSION['user']['idade'];
+
+        $altura = $_POST['text_altura'];
+        $peso = $_POST['text_peso'];
+        $cintura = $_POST['text_cintura'];
+        $quadril = $_POST['text_quadril'];
+        $pescoco = $_POST['text_pescoco'];
+
+        // os calculos ficarão aqui e serão colocados na tebela
+
+        // Cálculo do Percentual de Gordura (%)
+        if ($sexo == 'm') {
+            $gorduram = 86.010 * log10($cintura - $pescoco) - 70.041 * log10($altura) + 36.76;
+            $gordura = $gorduram;
+        } else {
+            $gorduraf = 163.205 * log10($cintura + $quadril - $pescoco) - 97.684 * log10($altura) - 78.387;
+            $gordura = $gorduraf;
+        }
+
+
+        // Cálculo do Metabolismo Basal
+        if ($sexo == 'm') {
+            $basal = 88.362 + (13.397 * $peso) + (4.799 * $altura) - (5.677 * $idade);
+        } else {
+            $basal = 447.593 + (9.247 * $peso) + (3.098 * $altura) - (4.330 * $idade);
+        }
+
+
+        $post_data = array(
+            'braco' => $_POST['text_braco'],
+            'antebraco' => $_POST['text_antebraco'],
+            'panturrilha' => $_POST['text_panturrilha'],
+            'perna' => $_POST['text_perna'],
+            'cinturaEscapular' => $_POST['text_cinturaEscapular'],
+            'meta' => $_POST['text_meta']
+        );
+        $post_data['sexo'] = $sexo;
+        $post_data['idade'] = $idade;
+        $post_data['altura'] = $altura;
+        $post_data['peso'] = $peso;
+        $post_data['cintura'] = $cintura;
+        $post_data['quadril'] = $quadril;
+        $post_data['pescoco'] = $pescoco;
+        $post_data['basal'] = $basal;
+        $post_data['gordura'] = $gordura;
+
+
+        // $model = new UserModel();
+        // $model->add_user_data($post_data);
+
+        $this->user_profile();
+        return;
+    }
+
+    // com basal e bf
+    public function novas_medidas_2() //aponta para o calculo_submit
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
+    {
+
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $this->login();
+            return;
+        }
+
+        $data = [];
+
+        if (!empty($_SESSION['validation_errors'])) {
+            $data['validation_errors'] = $_SESSION['validation_errors'];
+            unset($_SESSION['validation_errors']);
+        }
+
+        // check if there was an invalid login
+        if (!empty($_SESSION['server_error'])) {
+            $data['server_error'] = $_SESSION['server_error'];
+            unset($_SESSION['server_error']);
+        }
+
+        $data['user'] = $_SESSION['user'];
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+<<<<<<< HEAD
+        $this->view('novo_produto', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function produto_submit() //recebe de novas_medidas
+=======
+        $this->view('novas_medidas_2', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function medidas_submit_2() //recebe de novas_medidas
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
+    {
+
+
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $this->index();
+            return;
+        }
+
+
+        // Verifica se foi feita uma requisição POST
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            $this->index();
+            return;
+        }
+
+        // Inicializa o array de erros de validação
+        $validation_errors = [];
+
+        //valida todos os campos tendo que preenchelos.
+<<<<<<< HEAD
+        $campos = ['nome', 'desc', 'fab', 'garant', 'valor', 'qntd', 'cod', 'plat'];
+=======
+        $campos = ['altura', 'peso', 'cintura', 'quadril', 'pescoco', 'braco', 'antebraco', 'panturrilha', 'perna', 'cinturaEscapular', "basal", "gordura"];
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
+        foreach ($campos as $campo) {
+            // Verifica se o campo está vazio
+            if (empty($_POST['text_' . $campo])) {
+                $validation_errors[] = ucfirst($campo) . ' é obrigatório.';
+            }
+        }
+
+        // Validação do campo de meta
+<<<<<<< HEAD
+        if (empty($_POST['text_categoria'])) {
+            $validation_errors[] = 'A categoria é obrigatória.';
+=======
+        if (empty($_POST['text_meta'])) {
+            $validation_errors[] = 'A meta é obrigatória.';
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
+        }
+
+
+        // Se houver erros de validação, redireciona de volta ao formulário com os erros
+        if (!empty($validation_errors)) {
+            $_SESSION['validation_errors'] = $validation_errors;
+<<<<<<< HEAD
             $this->novo_produto(); // ou o nome da função que exibe o formulário
             return;
         }
@@ -560,6 +888,25 @@ class Main extends BaseController
 
 
     public function produtos_table()
+=======
+            $this->novas_medidas_2(); // ou o nome da função que exibe o formulário
+            return;
+        }
+
+
+
+        // $model = new UserModel();
+        // $model->add_user_data_2($_POST);
+
+        $this->user_profile();
+        return;
+    }
+    
+
+    // =============== USER_DATA CONTROLLERS ==============================
+
+    public function userdata_table()
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
         // check if there is no active user in session and blocks if hasn't
         if (!check_session()) {
@@ -568,6 +915,7 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
+<<<<<<< HEAD
         // $id = $_SESSION['user']['id'];
 
         $model = new ProductModel();
@@ -580,6 +928,20 @@ class Main extends BaseController
     }
 
     public function produto_delete($item_id)
+=======
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_user_data($id);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('userdata_table', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function medidas_delete($item_id)
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // Verifique se o ID foi passado
@@ -592,15 +954,26 @@ class Main extends BaseController
         $item_id = $_GET['id'];
 
 
+<<<<<<< HEAD
         $model = new ProductModel();
         $model->soft_delete($item_id);
 
         $this->produtos_table();
+=======
+        // $model = new UserModel();
+        // $model->soft_delete($item_id);
+
+        $this->userdata_table();
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         return;
     }
 
 
+<<<<<<< HEAD
     public function produto_edit($item_id)
+=======
+    public function medidas_edit($item_id)
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -624,10 +997,17 @@ class Main extends BaseController
 
 
         $data['user'] = $_SESSION['user'];
+<<<<<<< HEAD
         $item_id = $_GET['id'];
 
         $model = new ProductModel();
         $data['produto'] = $model->get_product_data($item_id);
+=======
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_user_data($id);
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // Verifique se o ID foi passado
         if (!isset($_GET['id'])) {
@@ -636,6 +1016,7 @@ class Main extends BaseController
             return;
         }
 
+<<<<<<< HEAD
 
         $this->view('shared/html_header');
         $this->view('navbar', $data);
@@ -644,6 +1025,22 @@ class Main extends BaseController
     }
 
     public function produto_edit_submit($id)
+=======
+        $item_id = $_GET['id'];
+
+        // $model = new UserModel();
+        // $data['user_data_id'] = $model->get_1_data_user($item_id);
+
+
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('medidas_edit', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function medidas_edit_submit($id)
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -663,7 +1060,11 @@ class Main extends BaseController
         $validation_errors = [];
 
         //valida todos os campos tendo que preenchelos.
+<<<<<<< HEAD
         $campos = ['nome', 'desc', 'fab', 'garant', 'valor', 'qntd', 'cod', 'plat'];
+=======
+        $campos = ['altura', 'peso', 'cintura', 'quadril', 'pescoco', 'braco', 'antebraco', 'panturrilha', 'perna', 'cinturaEscapular'];
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         foreach ($campos as $campo) {
             // Verifica se o campo está vazio
             if (empty($_POST['text_' . $campo])) {
@@ -672,27 +1073,68 @@ class Main extends BaseController
         }
 
         // Validação do campo de meta
+<<<<<<< HEAD
         if (empty($_POST['text_categoria'])) {
             $validation_errors[] = 'A categoria é obrigatória.';
+=======
+        if (empty($_POST['text_meta'])) {
+            $validation_errors[] = 'A meta é obrigatória.';
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         }
 
 
         // Se houver erros de validação, redireciona de volta ao formulário com os erros
         if (!empty($validation_errors)) {
             $_SESSION['validation_errors'] = $validation_errors;
+<<<<<<< HEAD
             $this->produto_edit($id);
+=======
+            $this->medidas_edit($id);
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
             return;
         }
 
 
+<<<<<<< HEAD
         $model = new ProductModel();
         $model->edit_produto($_POST, $id);
 
         $this->produtos_table();
+=======
+        // $model = new UserModel();
+        // $model->data_user_edit($_POST, $id);
+
+        $this->userdata_table();
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         return;
     }
 
 
+<<<<<<< HEAD
+=======
+    public function user_data()
+    {
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $this->login();
+            return;
+        }
+
+        $data['user'] = $_SESSION['user'];
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_user_data($id);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('userdata_table', $data);
+        $this->view('shared/html_footer');
+    }
+
+
+
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     // =============== ESTATISTICAS CONTROLLER  ===========================
 
     public function estatisticas()
@@ -706,6 +1148,10 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
+<<<<<<< HEAD
+=======
+        $id = $_SESSION['user']['id'];
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // $model = new UserModel();
         // $data['user_data'] = $model->get_user_data($id);
@@ -718,9 +1164,15 @@ class Main extends BaseController
 
 
 
+<<<<<<< HEAD
     // =============== CLIENTES CONTROLLERS ===========================
 
     public function clientes()
+=======
+    // =============== PLANNER CONTROLLERS ===========================
+
+    public function planner()
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
 
@@ -731,6 +1183,7 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
+<<<<<<< HEAD
 
         $model = new ClientModel();
         $data['clientes'] = $model->get_clientes();
@@ -742,6 +1195,20 @@ class Main extends BaseController
     }
 
     public function cadastro_cliente()
+=======
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_user_data($id);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('planner', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function planner_form()
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -750,6 +1217,7 @@ class Main extends BaseController
             return;
         }
 
+<<<<<<< HEAD
         // check if there are errors
         $data = [];
 
@@ -845,4 +1313,28 @@ class Main extends BaseController
 
 
 
+=======
+        $data['user'] = $_SESSION['user'];
+        $id = $_SESSION['user']['id'];
+
+        // $model = new UserModel();
+        // $data['user_data'] = $model->get_user_data($id);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('planner_form', $data);
+        $this->view('shared/html_footer');
+    }
+
+    public function planner_submit()
+    {
+
+        $data['user'] = $_SESSION['user'];
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $this->login();
+            return;
+        }
+    }
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 }

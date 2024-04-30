@@ -13,7 +13,11 @@
                 <div class="row justify-content-center">
                     <div class="col-10">
                     <div class="col-12 text-center">
+<<<<<<< HEAD
                         <img src="<?= IMAGE_PATH . 'logo-gira.gif'?>" class="img-fluid me-3 rounded-5" style="height: 46px;">
+=======
+                        <img src="<?= IMAGE_PATH . 'KEVIN-1_vetor2.png'?>" class="img-fluid me-3" style="height: 46px;">
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                         <h2><strong><?= APP_NAME ?></strong></h2>
                     </div>
                     <hr>
@@ -54,7 +58,11 @@
 
 
                             <div class="mb-3 text-center">
+<<<<<<< HEAD
                                 <a href="?ct=main&mt=index" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
+=======
+                                <a href="?ct=main&mt=home" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
+>>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                                 <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                             </div>
 
