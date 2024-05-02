@@ -54,9 +54,9 @@
                 </a>
             </div>
 
-            <!-- VENDA -->
+            <!-- VENDAS -->
             <div class="border shadow m-2">
-                <a href="?ct=main&mt=#" class="unlink m-2">
+                <a href="?ct=venda&mt=vendas_table" class="unlink m-2">
                     <div class="home-option p-5 text-center">
                         <h3 class="mb-3"><i class="fa-solid fa-dollar-sign"></i></h3>
                         <h5 class="px-4">VENDA</h5>

@@ -33,10 +33,14 @@
 
     <!-- datatables -->
     <link href="https://cdn.datatables.net/v/dt/dt-1.13.7/datatables.min.css" rel="stylesheet">
+
     <!--   JQuery   -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script defer src="https://cdn.datatables.net/v/dt/dt-1.13.7/datatables.min.js"></script>
+
+    <!-- codigo de barras JsBarcode  -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="<?= CSS_PATH ?>">
