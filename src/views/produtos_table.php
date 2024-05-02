@@ -53,9 +53,9 @@
             </tbody>
         </table>
     </div>
-    <div class="container text-center mt-4">
+    <!-- <div class="container text-center mt-4">
         tabela de intens excluidos -> <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-    </div>
+    </div> -->
     <?php endif; ?>
 </div>
 

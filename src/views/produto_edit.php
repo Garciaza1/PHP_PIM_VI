@@ -70,9 +70,31 @@ $garantia = $data['produto']['garantia'];
                                         <label for="text_cod" class="form-label">Codigo de barras / cod. do produto</label>
                                         <input type="text" name="text_cod" id="text_cod" value="<?= $cod ?>" class="form-control">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="text_plat" class="form-label">Plataforma (caso não tenha colocar "N/A")</label>
-                                        <input type="text" name="text_plat" id="text_plat" value="<?= $plataforma ?>" class="form-control">
+                                    <label class="form-label">Plataforma:</label>
+                                    <div class="mb-3 row">
+
+                                        <div class="col-6">
+                                            <div class="form-check mx-4">
+                                                <input class="form-check-input" type="checkbox" name="text_plat[]" value="Nintendo ">
+                                                <label class="form-check-label" for="text_plat">Nintendo</label>
+                                            </div>
+                                            <div class="form-check mx-4">
+                                                <input class="form-check-input" type="checkbox" name="text_plat[]"  value="Micrsoft ">
+                                                <label class="form-check-label" for="text_plat">Micrsoft</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-check mx-4">
+                                                <input class="form-check-input" type="checkbox" name="text_plat[]" value="Sony ">
+                                                <label class="form-check-label" for="text_plat">Sony</label>
+                                            </div>
+                                            <div class="form-check mx-4">
+                                                <input class="form-check-input" type="checkbox" name="text_plat[]" value="Outro ">
+                                                <label class="form-check-label" for="text_plat">Outro</label>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -80,15 +102,11 @@ $garantia = $data['produto']['garantia'];
                                     <div class="mb-3 d-flex">
                                         <label class="form-label">Categoria:</label>
                                         <div class="form-check mx-4">
-                                            <input class="form-check-input" type="radio" name="text_categoria" id="categoria_games" value="Games" checked>
-                                            <label class="form-check-label" for="categoria_games">Games (tem haver com games)</label>
-                                        </div>
-                                        <div class="form-check mx-4">
                                             <input class="form-check-input" type="radio" name="text_categoria" id="categoria_geek" value="Geek">
                                             <label class="form-check-label" for="categoria_geek">Geek</label>
                                         </div>
                                         <div class="form-check mx-4">
-                                            <input class="form-check-input" type="radio" name="text_categoria" id="categoria_jogo" value="Jogos">
+                                            <input class="form-check-input" type="radio" name="text_categoria" id="categoria_jogo" value="Jogos" checked>
                                             <label class="form-check-label" for="categoria_jogo">Jogos</label>
                                         </div>
                                         <div class="form-check mx-4">

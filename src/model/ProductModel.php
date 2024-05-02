@@ -32,8 +32,13 @@ class ProductModel extends Database
         $valor = $post_data["text_valor"];
         $qntd = $post_data["text_qntd"];
         $cod = $post_data["text_cod"];
-        $plat = $post_data["text_plat"];
+        $platafoma = $post_data["text_plat"];
         $categoria = $post_data["text_categoria"];
+
+        // conversão de array para string
+        if(count($platafoma) > 0 ){
+            $plat = implode(" | ", $platafoma);
+        }
 
         $stmt = $this->conn->prepare("INSERT INTO produtos (nome, descricao, cod, fabricante, categoria, quantidade, valor, plataforma, garantia, created_at) VALUES (:nome, :descricao, :cod, :fabricante, :categoria, :quantidade, :valor, :plataforma, :garantia, NOW())");
         $stmt->bindParam(':nome', $nome);
@@ -144,8 +149,12 @@ class ProductModel extends Database
         $valor = $post_data["text_valor"];
         $qntd = $post_data["text_qntd"];
         $cod = $post_data["text_cod"];
-        $plat = $post_data["text_plat"];
+        $platafoma = $post_data["text_plat"];
         $categoria = $post_data["text_categoria"];
+
+        if(count($platafoma) > 0 ){
+            $plat = implode(" | ", $platafoma);
+        }
 
         $stmt = $this->conn->prepare("UPDATE produtos SET nome = :nome, descricao = :descricao, cod = :cod, fabricante = :fabricante, categoria = :categoria, quantidade = :quantidade, valor = :valor, plataforma = :plataforma, garantia = :garantia, updated_at = NOW() WHERE id = :id");
         $stmt->bindParam(':id', $id);
