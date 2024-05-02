@@ -112,10 +112,10 @@ class Venda extends BaseController
         $product = new ProductModel;
         $venda = new VendaModel;
 
-        $product->produto_qntd_edit($item_id);
-
+        
         $venda->venda($_POST, $client_id, $item_id, $user_id);
-
+        
+        $product->produto_qntd_edit($item_id);
 
         $this->vendas_table();
         return;

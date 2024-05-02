@@ -4,12 +4,7 @@ namespace PIM_VI\Controllers;
 
 use PIM_VI\Controllers\BaseController;
 use PIM_VI\Models\Main as ModelsMain;
-<<<<<<< HEAD
-use PIM_VI\Models\ProductModel;
-use PIM_VI\Models\ClientModel;
-=======
 // use PIM_VI\Models\UserModel;
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
 class Main extends BaseController
 {
@@ -319,11 +314,7 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
-<<<<<<< HEAD
-        // $id = $_SESSION['user']['id'];
-=======
         $id = $_SESSION['user']['id'];
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // $model = new UserModel();
         // $data['user_data'] = $model->get_last_user_data($id);
@@ -400,10 +391,6 @@ class Main extends BaseController
                 $this->perfil();
                 return;
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         }
 
         // VALIDAÇÃO DO EMAIL =========
@@ -437,9 +424,6 @@ class Main extends BaseController
                 $this->perfil();
                 return;
             } else {
-<<<<<<< HEAD
-
-=======
                 
                 $_SESSION['server_error'] = "O token não foi validado prencha novamente";
                 $this->perfil();
@@ -528,62 +512,12 @@ class Main extends BaseController
                 return;
             } else {
                 
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
                 $_SESSION['server_error'] = "O token não foi validado prencha novamente";
                 $this->perfil();
                 return;
             }
         }
     }
-<<<<<<< HEAD
-    
-    // =============== PRODUTOS CONTROLLERS ==============================
-
-    public function produto($id)
-    {
-        // check if there is no active user in session and blocks if hasn't
-        if (!check_session()) {
-            $this->login();
-            return;
-        }
-
-        $data['user'] = $_SESSION['user'];
-        $model = new ProductModel();
-        $results = $model->get_product_data($id);
-        $data['produto'] = $results;
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('produto', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function produtos()
-    {
-        // check if there is no active user in session and blocks if hasn't
-        if (!check_session()) {
-            $this->login();
-            return;
-        }
-
-        $data['user'] = $_SESSION['user'];
-        // $id = $_SESSION['user']['id'];
-
-        $model = new ProductModel();
-        $results = $model->get_produtos();
-
-        $data['produtos'] = $results;
-        // printData($data['produtos']);
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('produtos', $data);
-        $this->view('shared/html_footer');
-    }
-
-
-    public function novo_produto() //aponta para o calculo_submit
-=======
 
 
     public function user_profile()
@@ -788,7 +722,6 @@ class Main extends BaseController
 
     // com basal e bf
     public function novas_medidas_2() //aponta para o calculo_submit
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -814,19 +747,11 @@ class Main extends BaseController
 
         $this->view('shared/html_header');
         $this->view('navbar', $data);
-<<<<<<< HEAD
-        $this->view('novo_produto', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function produto_submit() //recebe de novas_medidas
-=======
         $this->view('novas_medidas_2', $data);
         $this->view('shared/html_footer');
     }
 
     public function medidas_submit_2() //recebe de novas_medidas
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
 
@@ -847,11 +772,7 @@ class Main extends BaseController
         $validation_errors = [];
 
         //valida todos os campos tendo que preenchelos.
-<<<<<<< HEAD
-        $campos = ['nome', 'desc', 'fab', 'garant', 'valor', 'qntd', 'cod', 'plat'];
-=======
         $campos = ['altura', 'peso', 'cintura', 'quadril', 'pescoco', 'braco', 'antebraco', 'panturrilha', 'perna', 'cinturaEscapular', "basal", "gordura"];
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         foreach ($campos as $campo) {
             // Verifica se o campo está vazio
             if (empty($_POST['text_' . $campo])) {
@@ -860,35 +781,14 @@ class Main extends BaseController
         }
 
         // Validação do campo de meta
-<<<<<<< HEAD
-        if (empty($_POST['text_categoria'])) {
-            $validation_errors[] = 'A categoria é obrigatória.';
-=======
         if (empty($_POST['text_meta'])) {
             $validation_errors[] = 'A meta é obrigatória.';
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         }
 
 
         // Se houver erros de validação, redireciona de volta ao formulário com os erros
         if (!empty($validation_errors)) {
             $_SESSION['validation_errors'] = $validation_errors;
-<<<<<<< HEAD
-            $this->novo_produto(); // ou o nome da função que exibe o formulário
-            return;
-        }
-
-        $model = new ProductModel();
-        $model->cadastrar_produto($_POST);
-
-        $this->index();
-        return;
-    }
-
-
-
-    public function produtos_table()
-=======
             $this->novas_medidas_2(); // ou o nome da função que exibe o formulário
             return;
         }
@@ -906,7 +806,6 @@ class Main extends BaseController
     // =============== USER_DATA CONTROLLERS ==============================
 
     public function userdata_table()
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
         // check if there is no active user in session and blocks if hasn't
         if (!check_session()) {
@@ -915,20 +814,6 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
-<<<<<<< HEAD
-        // $id = $_SESSION['user']['id'];
-
-        $model = new ProductModel();
-        $data['produtos'] = $model->get_produtos();
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('produtos_table', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function produto_delete($item_id)
-=======
         $id = $_SESSION['user']['id'];
 
         // $model = new UserModel();
@@ -941,7 +826,6 @@ class Main extends BaseController
     }
 
     public function medidas_delete($item_id)
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // Verifique se o ID foi passado
@@ -954,26 +838,15 @@ class Main extends BaseController
         $item_id = $_GET['id'];
 
 
-<<<<<<< HEAD
-        $model = new ProductModel();
-        $model->soft_delete($item_id);
-
-        $this->produtos_table();
-=======
         // $model = new UserModel();
         // $model->soft_delete($item_id);
 
         $this->userdata_table();
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         return;
     }
 
 
-<<<<<<< HEAD
-    public function produto_edit($item_id)
-=======
     public function medidas_edit($item_id)
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -997,17 +870,10 @@ class Main extends BaseController
 
 
         $data['user'] = $_SESSION['user'];
-<<<<<<< HEAD
-        $item_id = $_GET['id'];
-
-        $model = new ProductModel();
-        $data['produto'] = $model->get_product_data($item_id);
-=======
         $id = $_SESSION['user']['id'];
 
         // $model = new UserModel();
         // $data['user_data'] = $model->get_user_data($id);
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // Verifique se o ID foi passado
         if (!isset($_GET['id'])) {
@@ -1016,16 +882,6 @@ class Main extends BaseController
             return;
         }
 
-<<<<<<< HEAD
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('produto_edit', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function produto_edit_submit($id)
-=======
         $item_id = $_GET['id'];
 
         // $model = new UserModel();
@@ -1040,7 +896,6 @@ class Main extends BaseController
     }
 
     public function medidas_edit_submit($id)
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -1060,11 +915,7 @@ class Main extends BaseController
         $validation_errors = [];
 
         //valida todos os campos tendo que preenchelos.
-<<<<<<< HEAD
-        $campos = ['nome', 'desc', 'fab', 'garant', 'valor', 'qntd', 'cod', 'plat'];
-=======
         $campos = ['altura', 'peso', 'cintura', 'quadril', 'pescoco', 'braco', 'antebraco', 'panturrilha', 'perna', 'cinturaEscapular'];
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         foreach ($campos as $campo) {
             // Verifica se o campo está vazio
             if (empty($_POST['text_' . $campo])) {
@@ -1073,45 +924,27 @@ class Main extends BaseController
         }
 
         // Validação do campo de meta
-<<<<<<< HEAD
-        if (empty($_POST['text_categoria'])) {
-            $validation_errors[] = 'A categoria é obrigatória.';
-=======
         if (empty($_POST['text_meta'])) {
             $validation_errors[] = 'A meta é obrigatória.';
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         }
 
 
         // Se houver erros de validação, redireciona de volta ao formulário com os erros
         if (!empty($validation_errors)) {
             $_SESSION['validation_errors'] = $validation_errors;
-<<<<<<< HEAD
-            $this->produto_edit($id);
-=======
             $this->medidas_edit($id);
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
             return;
         }
 
 
-<<<<<<< HEAD
-        $model = new ProductModel();
-        $model->edit_produto($_POST, $id);
-
-        $this->produtos_table();
-=======
         // $model = new UserModel();
         // $model->data_user_edit($_POST, $id);
 
         $this->userdata_table();
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
         return;
     }
 
 
-<<<<<<< HEAD
-=======
     public function user_data()
     {
         // check if there is no active user in session and blocks if hasn't
@@ -1134,7 +967,6 @@ class Main extends BaseController
 
 
 
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     // =============== ESTATISTICAS CONTROLLER  ===========================
 
     public function estatisticas()
@@ -1148,10 +980,7 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
-<<<<<<< HEAD
-=======
         $id = $_SESSION['user']['id'];
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 
         // $model = new UserModel();
         // $data['user_data'] = $model->get_user_data($id);
@@ -1164,15 +993,9 @@ class Main extends BaseController
 
 
 
-<<<<<<< HEAD
-    // =============== CLIENTES CONTROLLERS ===========================
-
-    public function clientes()
-=======
     // =============== PLANNER CONTROLLERS ===========================
 
     public function planner()
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
 
@@ -1183,19 +1006,6 @@ class Main extends BaseController
         }
 
         $data['user'] = $_SESSION['user'];
-<<<<<<< HEAD
-
-        $model = new ClientModel();
-        $data['clientes'] = $model->get_clientes();
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('clientes', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function cadastro_cliente()
-=======
         $id = $_SESSION['user']['id'];
 
         // $model = new UserModel();
@@ -1208,7 +1018,6 @@ class Main extends BaseController
     }
 
     public function planner_form()
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
     {
 
         // check if there is no active user in session and blocks if hasn't
@@ -1217,103 +1026,6 @@ class Main extends BaseController
             return;
         }
 
-<<<<<<< HEAD
-        // check if there are errors
-        $data = [];
-
-        if (!empty($_SESSION['validation_errors'])) {
-            $data['validation_errors'] = $_SESSION['validation_errors'];
-            unset($_SESSION['validation_errors']);
-        }
-
-        // check if there was an invalid login
-        if (!empty($_SESSION['server_error'])) {
-            $data['server_error'] = $_SESSION['server_error'];
-            unset($_SESSION['server_error']);
-        }
-
-        $data['user'] = $_SESSION['user'];
-
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('cadastro_cliente', $data);
-        $this->view('shared/html_footer');
-    }
-
-    public function cadastro_cliente_submit()
-    {
-
-        if (!check_session()) {
-            $this->index();
-            return;
-        }
-
-
-        // Verifica se foi feita uma requisição POST
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            $this->index();
-            return;
-        }
-
-        // form validation
-        $validation_errors = [];
-
-        // text_name
-        if (empty($_POST['text_name'])) {
-            $validation_errors[] = "Nome é de preenchimento obrigatório.";
-        
-        }
-
-        if (empty($_POST['text_cpf'])) {
-            $validation_errors[] = "CPF é de preenchimento obrigatório.";
-        
-        }
-        
-        if (empty($_POST['text_RG'])) {
-            $validation_errors[] = "RG é de preenchimento obrigatório.";
-        
-        }
-
-        // telefone
-        if (empty($_POST['text_telefone'])) {
-            $validation_errors[] = "Telefone é de preenchimento obrigatório.";
-        }
-
-        // endereço
-        if (empty($_POST['text_endereco'])) {
-            $validation_errors[] = "Endereco é de preenchimento obrigatório.";
-        }        
-
-        // email
-        if (empty($_POST['text_email'])) {
-            $validation_errors[] = "Email é de preenchimento obrigatório.";
-        } else {
-            if (!filter_var($_POST['text_email'], FILTER_VALIDATE_EMAIL)) {
-                $validation_errors[] = "Email não é válido.";
-            }
-        }
-
-        // check if there are validation errors to return to the form
-        if (!empty($validation_errors)) {
-            $_SESSION['validation_errors'] = $validation_errors;
-            $this->cadastro_cliente();
-            return;
-        }
-
-        $model = new ClientModel();
-        $model->cadastrar_cliente($_POST);
-
-        $this->clientes();
-        return;
-
-    }
-
-
-
-
-
-=======
         $data['user'] = $_SESSION['user'];
         $id = $_SESSION['user']['id'];
 
@@ -1336,5 +1048,4 @@ class Main extends BaseController
             return;
         }
     }
->>>>>>> 3d38b6a0dae6c765a0f77f1d0df78537f4dc4e44
 }
