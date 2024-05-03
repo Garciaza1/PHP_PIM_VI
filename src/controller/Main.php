@@ -693,31 +693,6 @@ class Main extends BaseController
     }
 
 
-    // =============== ESTATISTICAS CONTROLLER  ===========================
-
-    public function estatisticas()
-    {
-
-        $data['user'] = $_SESSION['user'];
-        // check if there is no active user in session and blocks if hasn't
-        if (!check_session()) {
-            $this->login();
-            return;
-        }
-
-        $data['user'] = $_SESSION['user'];
-
-        // $model = new UserModel();
-        // $data['user_data'] = $model->get_user_data($id);
-
-        $this->view('shared/html_header');
-        $this->view('navbar', $data);
-        $this->view('estatisticas', $data);
-        $this->view('shared/html_footer');
-    }
-
-
-
     // =============== CLIENTES CONTROLLERS ===========================
 
     public function clientes()

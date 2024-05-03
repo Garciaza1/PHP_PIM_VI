@@ -112,10 +112,10 @@ class Venda extends BaseController
         $product = new ProductModel;
         $venda = new VendaModel;
 
-        $product->produto_qntd_edit($item_id);
-
+        
         $venda->venda($_POST, $client_id, $item_id, $user_id);
-
+        
+        $product->produto_qntd_edit($item_id);
 
         $this->vendas_table();
         return;
@@ -230,13 +230,54 @@ class Venda extends BaseController
         return;
     }
 
-    public function cancelar_venda($id){
+    public function cancelar_venda($id, $product_id)
+    {
         $venda = new VendaModel;
+        $produto = new ProductModel;
+        
         $venda->cancelar_venda($id);
+        $produto->produto_qntd_cancelar($product_id);
+
+        $this->vendas_table();
+        return;
+    }
+
+    public function vendas_restaurar($id, $product_id)
+    {
+        $venda = new VendaModel;
+        $produto = new ProductModel;
+
+        $produto->produto_qntd_edit($product_id);
+        $venda->restaurar_venda($id);
 
         $this->vendas_table();
         return;
     }
 
 
+    public function estatisticas()
+    {
+        
+        // check if there is no active user in session and blocks if hasn't
+        if (!check_session()) {
+            $main = new Main;
+            $main->login();
+            return;
+        }
+
+        $data['user'] = $_SESSION['user'];
+
+        $venda = new VendaModel();
+        $data['vendas'] = $venda->get_vendas();
+        $data['soma_venda'] = $venda->soma_valor_vendas();
+        $data['vendas_canceladas'] = $venda->soma_vendas_canceladas();
+        $data['vendas_confirmadas'] = $venda->soma_vendas_confirmadas();
+
+        // printData($data);
+
+        $this->view('shared/html_header');
+        $this->view('navbar', $data);
+        $this->view('estatisticas', $data);
+        $this->view('shared/html_footer');
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-    $tipo_usuario = $data['user']['tipo'];
+$tipo_usuario = $data['user']['tipo'];
 ?>
 <div class="container mt-5">
     <h1>Tabela de Dados</h1>
@@ -14,6 +14,7 @@
                     <tr>
                         <?php if ($tipo_usuario == "Gerente") : ?>
                             <th>Cancelar</th>
+                            <th>Restaurar</th>
                             <th>Editar</th>
                         <?php endif; ?>
                         <th hidden>Id</th>
@@ -38,8 +39,21 @@
                     <?php foreach ($data['vendas'] as $row) : ?>
                         <tr class="text-center">
                             <?php if ($tipo_usuario == "Gerente") : ?>
-                                <td class="text-center"><a href="?ct=venda&mt=cancelar_venda&id=<?= $row['id'] ?>"><i class="fas fa-trash"></i></a></td>
-                                <td class="text-center"><a href="?ct=venda&mt=vendas_edit&id=<?= $row['id'] ?>"><i class="fas fa-pen-to-square"></i></a></td>
+                                <!-- CANCELAR COMPRA -->
+                                <?php if ($row['sts_pay'] == 'Confirmado') : ?>
+                                    <td class="text-center"><a href="?ct=venda&mt=cancelar_venda&id=<?= $row['id'] ?>&produto=<?=$row['id_produto']?>"><i class="fas fa-trash"></i></a></td>
+                                <?php else : ?>
+                                    <td class="text-center"><i class="fas fa-trash"></i></td>
+                                <?php endif; ?>
+                                
+                                <!-- RESTAURAR COMPRA -->
+                                <?php if($row['sts_pay'] == 'Cancelado'):?>
+                                    <td class="text-center"><a href="?ct=venda&mt=vendas_restaurar&id=<?= $row['id'] ?>"><i class="fas fa-pen-to-square"></i></a></td>
+                                    <?php else : ?>
+                                        <td class="text-center"><i class="fas fa-pen-to-square"></i></td>
+                                    <?php endif; ?>
+                                    
+                                <td class="text-center"><a href="?ct=venda&mt=vendas_edit&id=<?= $row['id'] ?>"><i class="fas fa-pen"></i></a></td>
                             <?php endif; ?>
                             <td hidden><?= $row['id'] ?></td>
                             <td><?= $row['cod_prod'] ?></td>

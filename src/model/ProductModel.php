@@ -36,7 +36,7 @@ class ProductModel extends Database
         $categoria = $post_data["text_categoria"];
 
         // conversão de array para string
-        if(count($platafoma) > 0 ){
+        if (count($platafoma) > 0) {
             $plat = implode(" | ", $platafoma);
         }
 
@@ -63,7 +63,7 @@ class ProductModel extends Database
 
     public function get_produtos()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE deleted_at is null AND quantidade > 0");
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE quantidade > 0 ");
 
         try {
             $stmt->execute();
@@ -102,7 +102,7 @@ class ProductModel extends Database
     // pega os dados not null deletados
     public function get_product_deleted()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE DeletedAt is not null");
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE deleted_at != '0000-00-00 00:00:00'");
 
         try {
             $stmt->execute();
@@ -120,7 +120,7 @@ class ProductModel extends Database
 
     public function get_product_data($id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = :id and deleted_at is null");
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = :id and deleted_at = '0000-00-00 00:00:00'");
         $stmt->bindParam(':id', $id);
 
         try {
@@ -152,7 +152,7 @@ class ProductModel extends Database
         $platafoma = $post_data["text_plat"];
         $categoria = $post_data["text_categoria"];
 
-        if(count($platafoma) > 0 ){
+        if (count($platafoma) > 0) {
             $plat = implode(" | ", $platafoma);
         }
 
@@ -177,10 +177,11 @@ class ProductModel extends Database
             print_r($e);
         }
     }
-    
-    public function produto_qntd_edit($id){
 
-        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = :id and deleted_at is null");
+    public function produto_qntd_edit($id)
+    {
+
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = :id and deleted_at = '0000-00-00 00:00:00' ");
         $stmt->bindParam(':id', $id);
 
         try {
@@ -191,15 +192,31 @@ class ProductModel extends Database
             echo '<br>';
             print_r($e);
         }
-        
+
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $qntd = $data['quantidade'];
         $nova_qntd = $qntd - 1;
-        
+
         $stmt = $this->conn->prepare("UPDATE produtos SET quantidade = :nova_qntd, updated_at = NOW() WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nova_qntd', $nova_qntd);
-        
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+    }
+
+    public function produto_qntd_cancelar($id)
+    {
+
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = :id and deleted_at = '0000-00-00 00:00:00' ");
+        $stmt->bindParam(':id', $id);
+
         try {
             $stmt->execute();
         } catch (Throwable $e) {
@@ -209,5 +226,27 @@ class ProductModel extends Database
             print_r($e);
         }
 
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $qntd = $data['quantidade'];
+
+        $nova_qntd = $qntd + 1;
+
+        $stmt = $this->conn->prepare("UPDATE produtos SET quantidade = :nova_qntd, updated_at = NOW() WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nova_qntd', $nova_qntd);
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
     }
+
+
+
+
+
 }

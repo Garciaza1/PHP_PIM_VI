@@ -28,7 +28,7 @@ class VendaModel extends Database
 
         $modelProduct = new ProductModel;
         $product = $modelProduct->get_product_data($product_id);
-        // printData($product);
+
 
         $CPF = $cliente['CPF'];
 
@@ -173,5 +173,100 @@ class VendaModel extends Database
             echo '<br>';
             print_r($e);
         }
+    }
+
+    public function restaurar_venda($id)
+    {
+
+        $stmt = $this->conn->prepare("UPDATE venda SET  sts_pay = 'Confirmado', sts_sell = 'Confirmado', updated_at = NOW() WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+    }
+
+
+    //=========== ESTATISTICAS ============ 
+
+    public function soma_valor_vendas()
+    {
+
+        $stmt = $this->conn->prepare("SELECT SUM(valor), COUNT(id), created_at FROM venda");
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+
+    public function soma_media_vendas()
+    {
+
+        $stmt = $this->conn->prepare("SELECT AVG(valor), COUNT(id), created_at FROM venda");
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+    
+    public function soma_vendas_canceladas()
+    {
+
+        $stmt = $this->conn->prepare("SELECT AVG(valor), COUNT(id), created_at FROM venda WHERE sts_pay = 'Cancelado' ");
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+
+    public function soma_vendas_confirmadas()
+    {
+
+        $stmt = $this->conn->prepare("SELECT AVG(valor), COUNT(id), created_at FROM venda WHERE sts_pay = 'Confirmado' ");
+
+        try {
+            $stmt->execute();
+        } catch (Throwable $e) {
+            echo '<pre>';
+            print_r($stmt);
+            echo '<br>';
+            print_r($e);
+        }
+
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
     }
 }
