@@ -8,7 +8,6 @@ use Throwable;
 class Main extends Database
 {
 
-    
     private $conn;
 
     public function __construct() {
@@ -23,9 +22,6 @@ class Main extends Database
         $email = $post_data['text_email'];
         $senha = $post_data['text_senha'];
         $tipo = $post_data['radio_type'];
-
-        
-        
 
         
         $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, senha, tipo, created_at) VALUES (:nome, :email, :senha, :tipo, NOW())");
